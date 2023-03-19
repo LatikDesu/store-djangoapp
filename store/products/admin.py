@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.utils.safestring import mark_safe
 
 from .models import ProductCategory, Products, Basket
 
@@ -13,10 +14,16 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Products)
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('name', 'price', 'quantity', 'category')
-    fields = ('image', 'name', 'description', ('price', 'quantity'), 'stripe_product_price_id', 'category')
-    readonly_fields = ('description',)
+    readonly_fields = ("get_image", 'description',)
+    fields = ('name', 'get_image', 'description', ('price', 'quantity'),
+              'stripe_product_price_id', 'category', 'image',)
     search_fields = ('name',)
     ordering = ('-name',)
+
+    def get_image(self, obj):
+        return mark_safe(f'<img src={obj.image.url} width="100" height="110"')
+
+    get_image.short_description = "Внешний вид"
 
 
 class BasketAdmin(admin.TabularInline):
