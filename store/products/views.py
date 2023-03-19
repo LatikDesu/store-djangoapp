@@ -1,20 +1,21 @@
-from django.shortcuts import render
-from django.views import View
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import HttpResponseRedirect
 from django.views.generic import TemplateView, ListView
 
-from .models import Products, ProductCategory
+from .models import Products, ProductCategory, Basket
 
 
 # Create your views here.
 class IndexView(TemplateView):
     template_name = 'products\index.html'
+    title = 'Store'
 
 
 class ProductsView(ListView):
     model = Products
     template_name = 'products\products.html'
-
-    # paginate_by = 3
+    title = 'Store - каталог товаров'
+    paginate_by = 3
 
     def get_queryset(self):
         queryset = super(ProductsView, self).get_queryset()
@@ -25,3 +26,16 @@ class ProductsView(ListView):
         context = super(ProductsView, self).get_context_data()
         context['categories'] = ProductCategory.objects.all()
         return context
+
+
+@login_required
+def basket_add(request, product_id):
+    Basket.create_or_update(product_id, request.user)
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])
+
+
+@login_required
+def basket_remove(request, basket_id):
+    basket = Basket.objects.get(id=basket_id)
+    basket.delete()
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])
