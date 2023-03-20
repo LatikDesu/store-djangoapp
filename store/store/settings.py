@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'django.contrib.sites',
+    'debug_toolbar',
 
     'allauth',
     'allauth.account',
@@ -58,6 +59,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'store.urls'
@@ -81,6 +83,24 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'store.wsgi.application'
 
+INTERNAL_IPS = [
+    '127.0.0.1',
+    'localhost',
+]
+
+# Redis
+
+REDIS_HOST = '127.0.0.1'
+REDIS_PORT = '6379'
+
+# Caches
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+        'LOCATION': f'redis://{REDIS_HOST}:{REDIS_PORT}',
+    }
+}
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
