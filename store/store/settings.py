@@ -165,14 +165,24 @@ LOGOUT_REDIRECT_URL = '/'
 
 # Sending emails
 if DEBUG:
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    EMAIL_HOST = 'smtp.yandex.ru'
+    EMAIL_PORT = 465
+    EMAIL_HOST_USER = 'testo-python@yandex.ru'
+    EMAIL_HOST_PASSWORD = 'atzfjbddiqwiiodc'
+    EMAIL_USE_SSL = True
 else:
     pass
-    # EMAIL_HOST = env('EMAIL_HOST')
-    # EMAIL_PORT = env('EMAIL_PORT')
-    # EMAIL_HOST_USER = env('EMAIL_HOST_USER')
-    # EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
-    # EMAIL_USE_SSL = env('EMAIL_USE_SSL')
+# EMAIL_HOST = env('EMAIL_HOST')
+# EMAIL_PORT = env('EMAIL_PORT')
+# EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+# EMAIL_USE_SSL = env('EMAIL_USE_SSL')
+# EMAIL_HOST = 'smtp.yandex.ru'
+# EMAIL_PORT = 465
+# EMAIL_HOST_USER = 'testo-python@yandex.ru'
+# EMAIL_HOST_PASSWORD = 'Zaqwsxcde123!'
+# EMAIL_USE_SSL = True
 
 # OAuth
 
@@ -194,3 +204,8 @@ SOCIALACCOUNT_PROVIDERS = {
         'OAUTH_PKCE_ENABLED': True,
     },
 }
+
+# Celery
+
+CELERY_BROKER_URL = f'redis://{REDIS_HOST}:{REDIS_PORT}'
+CELERY_RESULT_BACKEND = f'redis://{REDIS_HOST}:{REDIS_PORT}'
