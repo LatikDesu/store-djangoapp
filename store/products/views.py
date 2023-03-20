@@ -2,16 +2,17 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import HttpResponseRedirect
 from django.views.generic import TemplateView, ListView
 
+from common.views import TitleMixin
 from .models import Products, ProductCategory, Basket
 
 
 # Create your views here.
-class IndexView(TemplateView):
+class IndexView(TitleMixin, TemplateView):
     template_name = 'products\index.html'
     title = 'Store'
 
 
-class ProductsView(ListView):
+class ProductsView(TitleMixin, ListView):
     model = Products
     template_name = 'products\products.html'
     title = 'Store - каталог товаров'
