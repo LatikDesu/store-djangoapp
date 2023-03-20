@@ -43,10 +43,8 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.github',
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.vk',
-    'allauth.socialaccount.providers.facebook',
 
     'products.apps.ProductsConfig',
     'users.apps.UsersConfig',
@@ -93,8 +91,12 @@ WSGI_APPLICATION = 'store.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'store_db',
+        'USER': 'postgres',
+        'PASSWORD': 'lol',
+        'HOST': '127.0.0.1',
+        'PORT': '5433',
     }
 }
 
