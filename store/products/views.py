@@ -1,20 +1,21 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import HttpResponseRedirect
-from django.views.generic import TemplateView, ListView
+from django.views.generic import ListView, TemplateView
 
 from common.views import TitleMixin
-from .models import Products, ProductCategory, Basket
+
+from .models import Basket, ProductCategory, Products
 
 
 # Create your views here.
 class IndexView(TitleMixin, TemplateView):
-    template_name = 'products\index.html'
+    template_name = 'products/index.html'
     title = 'Store'
 
 
 class ProductsView(TitleMixin, ListView):
     model = Products
-    template_name = 'products\products.html'
+    template_name = 'products/products.html'
     title = 'Store - каталог товаров'
     paginate_by = 3
 
