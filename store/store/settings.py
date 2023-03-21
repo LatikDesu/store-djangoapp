@@ -26,7 +26,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-DOMAIN_NAME = 'http://localhost:8000'
+DOMAIN_NAME = 'http://127.0.0.1:8000'
 
 # Application definition
 
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
 
     'products.apps.ProductsConfig',
     'users.apps.UsersConfig',
+    'orders.apps.OrdersConfig',
 ]
 
 MIDDLEWARE = [
@@ -209,3 +210,9 @@ SOCIALACCOUNT_PROVIDERS = {
 
 CELERY_BROKER_URL = f'redis://{REDIS_HOST}:{REDIS_PORT}'
 CELERY_RESULT_BACKEND = f'redis://{REDIS_HOST}:{REDIS_PORT}'
+
+# Stripe
+
+STRIPE_PUBLIC_KEY = 'pk_test_51Mo0VYCUXvrmTcyeZ8aececT6uw4iKRNJmDqHAYMnFuuAcGd3aRPqAwiFsweBVWLOoUm6E02W0vbem9VBPjFYXZP00PdZjnmH7'
+STRIPE_SECRET_KEY = 'sk_test_51Mo0VYCUXvrmTcyeC9TrV1lbvvyftotHEv0ZMxQPns27kMRKVJpVDJ0Ay1jRz3OxxRDQEJcLbNMmfDvRomdmbIl800h3Al96UU'
+STRIPE_WEBHOOK_SECRET = 'whsec_1b33185d930b7e8f84d429052ca827cab44339872a61162f4d84b96d0aaaf9e8'
