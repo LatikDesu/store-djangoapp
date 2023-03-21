@@ -31,14 +31,14 @@ class UserRegistrationForm(UserCreationForm):
     password2 = forms.CharField(widget=forms.PasswordInput(attrs={
         'class': 'form-control py-4', 'placeholder': 'Подтвердите пароль'}))
 
-    class Meta:
-        model = User
-        fields = ('first_name', 'last_name', 'username', 'email', 'password1', 'password2')
-
     def save(self, commit=True):
         user = super(UserRegistrationForm, self).save(commit=True)
         send_email_verification.delay(user.id)
         return user
+
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'username', 'email', 'password1', 'password2')
 
 
 class UserProfileForm(UserChangeForm):

@@ -15,4 +15,5 @@ RUN pip install -r requirements.txt
 # copy project
 COPY . .
 
-ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
+RUN chmod +x /usr/src/app/entrypoint.sh
+RUN chmod +x /usr/src/app/worker-entrypoint.sh

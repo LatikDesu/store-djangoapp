@@ -1,5 +1,3 @@
-from unicodedata import category
-
 import stripe
 from django.conf import settings
 from django.db import models
